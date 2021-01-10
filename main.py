@@ -6,7 +6,7 @@ import csv
 
 if __name__ == "__main__":
             
-    string = input("Provide amino acid chain:")
+    string = input("Provide amino acid chain:").upper()
 
     # algoritme
     x_list = [0]
@@ -60,7 +60,9 @@ if __name__ == "__main__":
         if amino == 'H':
             colour.append('blue')   
         elif amino == 'P':
-            colour.append('red')   
+            colour.append('red') 
+        else:
+            colour.append('green')  
 
     for i in range(len(protein.string)):
         plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 20)
