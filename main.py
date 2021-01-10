@@ -55,7 +55,7 @@ if __name__ == "__main__":
     plt.xlim(-15,15)
     plt.ylim(-15,15)
 
-    col = []
+    colour = []
     for amino in protein.string:
         if amino == 'H':
             col.append('blue')   
@@ -63,6 +63,6 @@ if __name__ == "__main__":
             col.append('red')   
 
     for i in range(len(protein.string)):
-        plt.scatter(protein.x_list[i], protein.y_list[i], c = col[i], s = 20)
+        plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 20)
 
     plt.show()
