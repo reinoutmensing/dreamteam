@@ -1,5 +1,6 @@
 from protein import Protein
 import matplotlib.pyplot as plt
+import numpy as np
 import random
 import csv
 
@@ -56,22 +57,26 @@ if __name__ == "__main__":
     # visualisatie
     plt.ylabel('y_waarden')
     plt.xlabel('x_waarden')
-    #plt.xlim(-15,15)
-    #plt.ylim(-15,15)
+   
 
     colour = []
     for amino in protein.string:
         if amino == 'H':
-            colour.append('blue')   
+            colour.append('red')   
         elif amino == 'P':
-            colour.append('red') 
+            colour.append('blue') 
         elif amino == 'C':
             colour.append('green')  
         else:
             colour.append('black')
 
-    for i in range(len(protein.string)):
-        plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 20)
 
-    plt.tight_layout()
+    for i in range(len(protein.string)):
+        plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 40, zorder=2)
+    
+    plt.xticks(np.arange(min(protein.x_list)-5, max(protein.x_list )+6, 1.0))
+    plt.yticks(np.arange(min(protein.y_list)-5, max(protein.y_list )+6, 1.0))
+    
+    plt.grid(b=True, which='major', color='#666666', linestyle='-', alpha= 1.0, zorder=1)
+    plt.rc('axes', axisbelow=True)
     plt.show()
