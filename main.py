@@ -16,10 +16,12 @@ if __name__ == "__main__":
     oorspronkelijkpunt_x = 0
     oorspronkelijkpunt_y = 0
     direction_list = []
+    direction_options = [-1, 1, -2, 2]
+
     for place in string:
 
         while beginpunt_x in x_list and beginpunt_y in y_list:
-            replacement = round(4 * random.random())
+            replacement = rep = random.choice(direction_options)
             beginpunt_x = oorspronkelijkpunt_x
             beginpunt_y = oorspronkelijkpunt_y
             
@@ -30,10 +32,10 @@ if __name__ == "__main__":
             if replacement == 2:
                 beginpunt_y = beginpunt_y + 1
             
-            if replacement == 3:
+            if replacement == -1:
                 beginpunt_x = beginpunt_x - 1
             
-            if replacement == 4:
+            if replacement == -2:
                 beginpunt_y = beginpunt_y - 1
         
         x_list.append(beginpunt_x)
@@ -41,6 +43,8 @@ if __name__ == "__main__":
         oorspronkelijkpunt_x = beginpunt_x
         oorspronkelijkpunt_y = beginpunt_y
         direction_list.append(replacement)
+    
+    direction_list[-1] = 0
 
     # create a protein object
     protein = Protein(x_list,y_list, string, direction_list)
@@ -52,8 +56,8 @@ if __name__ == "__main__":
     # visualisatie
     plt.ylabel('y_waarden')
     plt.xlabel('x_waarden')
-    plt.xlim(-15,15)
-    plt.ylim(-15,15)
+    #plt.xlim(-15,15)
+    #plt.ylim(-15,15)
 
     colour = []
     for amino in protein.string:
@@ -61,10 +65,13 @@ if __name__ == "__main__":
             colour.append('blue')   
         elif amino == 'P':
             colour.append('red') 
-        else:
+        elif amino == 'C':
             colour.append('green')  
+        else:
+            colour.append('black')
 
     for i in range(len(protein.string)):
         plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 20)
 
+    plt.tight_layout()
     plt.show()
