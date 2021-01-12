@@ -12,8 +12,10 @@ def random_directionlist(string):
     direction_options = [-1, 1, -2, 2]
 
     for place in string:
+        check = True
 
-        while beginpunt_x in x_list and beginpunt_y in y_list:
+        while check == True: 
+            counter = 0
             replacement = random.choice(direction_options)
             beginpunt_x = oorspronkelijkpunt_x
             beginpunt_y = oorspronkelijkpunt_y
@@ -30,6 +32,12 @@ def random_directionlist(string):
             
             if replacement == -2:
                 beginpunt_y = beginpunt_y - 1
+
+            for i in range (0, len(x_list)):
+                if beginpunt_y != y_list[i]  or beginpunt_x != x_list[i] :
+                    counter = counter + 1    
+            if counter == len(x_list):
+                check = False
         
         x_list.append(beginpunt_x)
         y_list.append(beginpunt_y)

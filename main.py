@@ -36,12 +36,13 @@ if __name__ == "__main__":
             colour.append('black')
 
     for i in range(len(protein.string)):
-        plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 40, zorder=2)
+        plt.scatter(protein.x_list[i], protein.y_list[i], c = colour[i], s = 40, zorder=3)
     
     plt.xticks(np.arange(min(protein.x_list)-5, max(protein.x_list )+6, 1.0))
     plt.yticks(np.arange(min(protein.y_list)-5, max(protein.y_list )+6, 1.0))
     plt.ylabel('y_waarden')
     plt.xlabel('x_waarden')
+    plt.plot(protein.x_list, protein.y_list, '-', zorder= 2)
     plt.grid(b=True, which='major', color='#666666', linestyle='-', alpha= 1.0, zorder=1)
     plt.rc('axes', axisbelow=True)
     plt.show()
