@@ -1,1 +1,10 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level></diagram>
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>240</x><y>190</y><w>210</w><h>190</h></coordinates><panel_attributes>Protein
+--
+x_list = [ ]
+y_list = [ ] 
+string = String
+direction_list = [ ]
+--
+score (self): Int
+output (self): CSV
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
