@@ -27,8 +27,6 @@ if __name__ == "__main__":
         protein = Protein(x_list,y_list, string, direction_list)
         # print(protein.string, protein.x_list, protein.y_list, protein.direction_list)
 
-        # output csv:
-        protein.output()
 
         # visualisatie
         colour = []
@@ -43,7 +41,7 @@ if __name__ == "__main__":
             else:
                 colour.append('black')
         print("frots")
-        score = protein.score()
+        score = protein.getscore()
         print("-------------i")
         print(i)
         print(score)
@@ -55,7 +53,9 @@ if __name__ == "__main__":
             best_colour = colour
             best_x_list = x_list
             best_y_list = y_list
-    print("penisdenis")
+            # output csv:
+            protein.output()
+
     print(score_list)
     
     for i in range(len(protein.string)):

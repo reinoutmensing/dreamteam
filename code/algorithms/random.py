@@ -11,9 +11,8 @@ def random_directionlist(string):
     direction_list = []
     direction_options = [-1, 1, -2, 2]
 
-    for place in range(0,len(string) - 1):
+    for place in range(0, len(string) -1):
         check = True
-       
 
         while check == True: 
             counter = 0
@@ -44,9 +43,7 @@ def random_directionlist(string):
         y_list.append(beginpunt_y)
         oorspronkelijkpunt_x = beginpunt_x
         oorspronkelijkpunt_y = beginpunt_y
-        direction_list.append(replacement)
-    print(direction_list[-1]) 
-    # Zie niet wat je hier precies doet.
+        direction_list.append(replacement) 
     direction_list[-1] = 0
         
     return direction_list, x_list, y_list
