@@ -138,6 +138,60 @@ plt.show()
         # print(coordinates)
         
 
+score_x_list = []
+    score = 0
+    x_punt = []
+    y_punt = []
+    for i in range(0,len(protein.string)):
+        if protein.string[i] == 'H':
+            for j in range(i + 1, len(protein.string)):
+                if protein.string[j] == 'H' and j - i > 1:
+                    if abs(x_list[j] - x_list[i]) == 1 and abs(y_list[j] - y_list[i]) == 0:
+                        score = score + 1
+                        # score_x_list.append
+                        # x_punt.append(x_list[i])
+                        # x_punt.append(x_list[j])
+                        # y_punt.append(y_list[i])
+                        # y_punt.append(y_list[j])
+                    
+                    if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 1:
+                        score = score + 1
+
+                        # x_punt.append(x_list[i])
+                        # x_punt.append(x_list[j])
+                        # y_punt.append(y_list[i])
+                        # y_punt.append(y_list[j])
+
+        if protein.string[i] == 'C':
+            for k in range(i,len(protein.string)):
+                if protein.string[k] == 'C' and k-i > 1:
+                    if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0:
+                        score = score + 5
+
+                        # x_punt.append(x_list[i])
+                        # x_punt.append(x_list[j])
+                        # y_punt.append(y_list[i])
+                        # y_punt.append(y_list[j])
+
+                    if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1:
+                        score = score + 5
+
+                        # x_punt.append(x_list[i])
+                        # x_punt.append(x_list[j])
+                        # y_punt.append(y_list[i])
+                        # y_punt.append(y_list[j])
+                    
+    print('________score')
+    print(score)
+
+    depth = len(protein.string)
+    stack = ['']
+    while len(stack) > 0:
+        state = stack.pop()
+        print(state)
+        if len(state) < depth:
+            for i in []
+
 
         
     
