@@ -4,6 +4,7 @@ x_list = [ ]
 y_list = [ ] 
 string = String
 direction_list = [ ]
+score = 0
 --
 score (self): Int
 output (self): CSV
