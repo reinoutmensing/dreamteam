@@ -1,11 +1,22 @@
-<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>240</x><y>190</y><w>210</w><h>190</h></coordinates><panel_attributes>Protein
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>210</x><y>170</y><w>210</w><h>240</h></coordinates><panel_attributes>Protein
 --
-x_list = [ ]
-y_list = [ ] 
-string = String
-direction_list = [ ]
-score = 0
+id = id
+string = string
+self.score = 0 
+self.aminochain = []
+self.direction_list = []
+self.make_protein()
+self.aminocoordinates = []
+self.collision = False
 --
+make_protein(self): []
+fold_next_amino(self, position, direction): []
 score (self): Int
 output (self): CSV
-</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+plot(self): Plot
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>170</y><w>210</w><h>70</h></coordinates><panel_attributes>Amino
+--
+self.acid_type = String
+self.x = Int
+self.y = Int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>170</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;10</additional_attributes></element></diagram>
