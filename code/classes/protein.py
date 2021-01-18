@@ -32,30 +32,63 @@ class Protein():
             a = Amino(c)
             self.aminochain.append(a)
             
-            
+
     def fold_next_amino(self, position, direction):
         """
         Folds the amino acid at the specified position in the chain, in the given direction.
         """
-        self.direction_list.append(direction)
-        if direction == 1:
-            self.aminochain[position].x = self.aminochain[position - 1].x + 1
-            self.aminochain[position].y = self.aminochain[position - 1].y
-        if direction == -1:
-            self.aminochain[position].x = self.aminochain[position - 1].x - 1
-            self.aminochain[position].y = self.aminochain[position - 1].y
-        if direction == 2:
-            self.aminochain[position].y = self.aminochain[position - 1].y + 1
-            self.aminochain[position].x = self.aminochain[position - 1].x
-        if direction == -2:
-            self.aminochain[position].y = self.aminochain[position - 1].y - 1
-            self.aminochain[position].x = self.aminochain[position - 1].x
-        
-        # Checks if a collision has occured by verifiying the uniqueness of all the amino acid coordinates. 
-        self.aminocoordinates.append((self.aminochain[position].x, self.aminochain[position].y))
-        if len(self.aminocoordinates) != len(set(self.aminocoordinates)):
-            self.collision = True
+
+        newcord = None
+        if direction == 1 and 1 not in self.aminochain[position].checklist:
+
+            newcord = (self.aminochain[position - 1].x + 1, self.aminochain[position - 1].y)
+            self.aminochain[position].checklist.append(1)
             
+
+        elif direction == -1 and 2 not in self.aminochain[position].checklist:
+
+            newcord = (self.aminochain[position - 1].x - 1, self.aminochain[position - 1].y)
+            self.aminochain[position].checklist.append(2)
+            
+        elif direction == 2 and 3 not in self.aminochain[position].checklist:
+            
+            newcord = (self.aminochain[position - 1].x , self.aminochain[position - 1].y + 1)
+            self.aminochain[position].checklist.append(3)
+            
+        elif direction == -2 and 4 not in self.aminochain[position].checklist:
+
+            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y - 1)
+            self.aminochain[position].checklist.append(4)
+            
+        
+        if newcord in set(self.aminocoordinates):
+            
+            # Code is build in
+            if len(self.aminochain[position].checklist) == 3:
+                self.collision = True
+                return False
+            
+
+            else:
+                # and checklist
+                return True
+        elif newcord == None:
+            # and checklist
+            return True 
+
+
+        else :
+            self.aminochain[position].x = newcord[0]
+            self.aminochain[position].y = newcord[1]
+
+        # Checks if a collision has occured by verifiying the uniqueness of all the amino acid coordinates. 
+            self.aminocoordinates.append((self.aminochain[position].x, self.aminochain[position].y))
+            self.direction_list.append(direction)
+            return False
+        
+        # wat je kan doen is de directions per coor bijhouden en zorgen dat hij niet twee keer dezelfde directie op kan gaan
+        # dan een counter bijhouden en als de counter op vier staat zorgen dat de functie breakt en de volgende string bekeken wordt.
+       
 
   
     def getscore(self):

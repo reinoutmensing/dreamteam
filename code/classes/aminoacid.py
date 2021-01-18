@@ -6,6 +6,7 @@ class Amino():
         self.acid_type = acid_type
         self.x = 0 
         self.y = 0
+        self.checklist = []
 
     
     def __repr__(self):
