@@ -1,6 +1,6 @@
 from code.algorithms.random2 import random_algorithm
-
-
+from code.classes.protein import Protein
+from code.algorithms.depth import DepthFirst
 
 if __name__ == "__main__":
 
@@ -11,12 +11,16 @@ if __name__ == "__main__":
     try_number = int(input("Provide number of tries:"))
 
     # Folding algorithm
-    algo = random_algorithm(string, try_number)
-    score_list = algo[1]
-    highest_protein = algo[2]
 
-    # CSV output
-    highest_protein.output()
+    algo = DepthFirst(string)
+    algo.run()
 
-    # Visualisatie
-    highest_protein.plot()
+    # score_list = algo[1]
+    # highest_protein = algo[2]
+
+    # # CSV output
+    algo.protein.output()
+    algo.protein.getscore()
+
+    # # Visualisatie
+    algo.protein.plot()

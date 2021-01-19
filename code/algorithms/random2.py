@@ -3,6 +3,7 @@ import random
 from code.classes.protein import Protein
 from tqdm import tqdm
 import copy
+import uuid
 
 
 def random_algorithm(string, try_number):
@@ -25,8 +26,8 @@ def random_algorithm(string, try_number):
                 direction = random.choice(direction_options)
 
     #             #dit kan nog in het algemene algorithme staan door de list mee te geven en options
-                while direction_list[i-1] == (-1 * direction):
-                    direction = random.choice(direction_options)
+                # while direction_list[i-1] == (-1 * direction):
+                #     direction = random.choice(direction_options)
                 
                 check = a.fold_next_amino(i, direction)
                 # a.fold_next_amino(i,direction)

@@ -22,7 +22,19 @@ class Protein():
         Returns a representation of the protein.
         """
         return f"{self.string}, {self.score}"
+    
+    def get_unplaced_amino_position(self):
+
+        for index, amino in enumerate(self.aminochain[1:]):
+            if amino.x == 0 and amino.y == 0:
+                return index + 1
         
+        return None
+
+        
+            
+
+
 
     def make_protein(self):
         """
@@ -64,7 +76,7 @@ class Protein():
         if newcord in set(self.aminocoordinates):
             
             # Code is build in
-            if len(self.aminochain[position].checklist) == 3:
+            if len(self.aminochain[position].checklist) == 4:
                 self.collision = True
                 return False
             
