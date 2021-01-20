@@ -30,11 +30,7 @@ class Protein():
                 return index + 1
         
         return None
-
-        
             
-
-
 
     def make_protein(self):
         """

@@ -1,49 +1,48 @@
 import numpy as np
 import random
+from code.classes.protein import Protein
+from tqdm import tqdm
+import copy
+import uuid
 
-def random_directionlist(string):
-    x_list = [0]
-    y_list = [0]
-    beginpunt_x = 0
-    beginpunt_y = 0
-    oorspronkelijkpunt_x = 0
-    oorspronkelijkpunt_y = 0
-    direction_list = []
+
+def random_algorithm(string, try_number):
     direction_options = [-1, 1, -2, 2]
 
-    for place in range(0, len(string) -1):
-        check = True
+    protein_list = []
+    score_list = []
+    highscore = 0
+    counter = 0
 
-        while check == True: 
-            counter = 0
-            replacement = random.choice(direction_options)
-            beginpunt_x = oorspronkelijkpunt_x
-            beginpunt_y = oorspronkelijkpunt_y
-            
-            # verplaatsing in de x-richting
-            if replacement == 1:
-                beginpunt_x = beginpunt_x + 1
-            
-            if replacement == 2:
-                beginpunt_y = beginpunt_y + 1
-            
-            if replacement == -1:
-                beginpunt_x = beginpunt_x - 1
-            
-            if replacement == -2:
-                beginpunt_y = beginpunt_y - 1
+    for j in tqdm(range(0, try_number)):
+        a = Protein(copy.deepcopy(string), j)
 
-            for i in range (0, len(x_list)):
-                if beginpunt_y != y_list[i]  or beginpunt_x != x_list[i] :
-                    counter = counter + 1    
-            if counter == len(x_list):
-                check = False
+        direction_list = []
+        direction_list.append(0)
+
+        for i in range(1, len(string)):
+            check = True 
+            while check :
+                direction = random.choice(direction_options)
+
+    #             #dit kan nog in het algemene algorithme staan door de list mee te geven en options
+                # while direction_list[i-1] == (-1 * direction):
+                #     direction = random.choice(direction_options)
+                
+                check = a.fold_next_amino(i, direction)
+                # a.fold_next_amino(i,direction)
+    
+            direction_list.append(direction)
+            
         
-        x_list.append(beginpunt_x)
-        y_list.append(beginpunt_y)
-        oorspronkelijkpunt_x = beginpunt_x
-        oorspronkelijkpunt_y = beginpunt_y
-        direction_list.append(replacement) 
-    direction_list[-1] = 0
-        
-    return direction_list, x_list, y_list
+        a.getscore()
+        score = a.score
+        score_list.append(score)
+        protein_list.append(a)
+        if score > highscore:
+            highscore = score
+            counter = j
+
+    highest_protein = protein_list[counter]       
+    return protein_list, score_list, highest_protein
+
