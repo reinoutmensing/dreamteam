@@ -176,7 +176,6 @@ class Protein():
             #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
             #                     self.score = self.score + 1
             #                     print(self.score)
-            print(self.score)
             return self.score
     
 
