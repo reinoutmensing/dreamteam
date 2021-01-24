@@ -32,7 +32,7 @@ def random_algorithm(string, try_number):
                 check = a.fold_next_amino(i, direction)
                 # a.fold_next_amino(i,direction)
     
-            direction_list.append(direction)
+            direction_list.append(direction) # output z klopt hierdoor niet
             
         
         a.getscore()

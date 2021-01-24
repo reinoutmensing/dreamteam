@@ -3,6 +3,8 @@ from code.classes.aminoacid import Amino
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits import mplot3d
 
 class Protein():
     
@@ -14,7 +16,7 @@ class Protein():
         self.direction_list = []
         self.make_protein()
         self.aminocoordinates = []
-        self.aminocoordinates.append((self.aminochain[0].x, self.aminochain[0].y))
+        self.aminocoordinates.append((self.aminochain[0].x, self.aminochain[0].y, self.aminochain[0].z))
         self.collision = False
 
     def __repr__(self):
@@ -26,7 +28,7 @@ class Protein():
     def get_unplaced_amino_position(self):
 
         for index, amino in enumerate(self.aminochain[1:]):
-            if amino.x == 0 and amino.y == 0:
+            if amino.x == 0 and amino.y == 0 and amino.z == 0:
                 return index + 1
         
         return None
@@ -47,27 +49,34 @@ class Protein():
         """
 
         newcord = None
+        deler = round(len(self.aminochain) / 3)
+        
+        # if ((len(self.direction_list) + 1 )% deler == 0):
+        #     newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position - 1].z + 1)
+        #     direction = 5
+
         if direction == 1 and 1 not in self.aminochain[position].checklist:
 
-            newcord = (self.aminochain[position - 1].x + 1, self.aminochain[position - 1].y)
+            newcord = (self.aminochain[position - 1].x + 1, self.aminochain[position - 1].y, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(1)
             
 
         elif direction == -1 and 2 not in self.aminochain[position].checklist:
 
-            newcord = (self.aminochain[position - 1].x - 1, self.aminochain[position - 1].y)
+            newcord = (self.aminochain[position - 1].x - 1, self.aminochain[position - 1].y, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(2)
             
         elif direction == 2 and 3 not in self.aminochain[position].checklist:
             
-            newcord = (self.aminochain[position - 1].x , self.aminochain[position - 1].y + 1)
+            newcord = (self.aminochain[position - 1].x , self.aminochain[position - 1].y + 1, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(3)
             
         elif direction == -2 and 4 not in self.aminochain[position].checklist:
 
-            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y - 1)
+            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y - 1, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(4)
-            
+        
+        
         
         if newcord in set(self.aminocoordinates):
             
@@ -88,9 +97,10 @@ class Protein():
         else :
             self.aminochain[position].x = newcord[0]
             self.aminochain[position].y = newcord[1]
+            self.aminochain[position].z = newcord[2]
 
         # Checks if a collision has occured by verifiying the uniqueness of all the amino acid coordinates. 
-            self.aminocoordinates.append((self.aminochain[position].x, self.aminochain[position].y))
+            self.aminocoordinates.append((self.aminochain[position].x, self.aminochain[position].y, self.aminochain[position].z))
             self.direction_list.append(direction)
             return False
         
@@ -108,24 +118,54 @@ class Protein():
         else: 
             x_list = [x.x for x in self.aminochain]
             y_list = [x.y for x in self.aminochain]
+            z_list = [x.z for x in self.aminochain] 
+            print(x_list)
+            print(y_list)
+            print(z_list)
             for i in range(0,len(self.string)):
                 if self.string[i] == 'H':
                     for j in range(i + 1, len(self.string)):
-                        if self.string[j] == 'H' and j - i > 1:
-                            if abs(x_list[j] - x_list[i]) == 1 and abs(y_list[j] - y_list[i]) == 0:
-                                self.score = self.score + 1
+                        if self.string[j] == 'H' or self.string[j] ==  'C' and j - i > 1:
+                            if abs(z_list[j] - z_list[i]) == 0:
+                                if abs(x_list[j] - x_list[i]) == 1 and abs(y_list[j] - y_list[i]) == 0:
+                                    self.score = self.score + 1
+                                    print("krabel")
                             
-                            if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 1:
-                                self.score = self.score + 1
+                                if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 1:
+                                    self.score = self.score + 1
+                                    print("frabel")
 
+                            if abs(z_list[j] - z_list[i]) == 1:
+                                if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 0:
+                                    self.score = self.score + 1
+                                    print("snabel")
                 if self.string[i] == 'C':
                     for k in range(i,len(self.string)):
                         if self.string[k] == 'C' and k-i > 1:
-                            if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0:
+                            if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0:
                                 self.score = self.score + 5
+                                print(self.score)
 
-                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1:
+                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
                                 self.score = self.score + 5
+                                print(self.score)
+                            
+                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
+                                self.score = self.score + 5
+                                print(self.score)
+                        
+                        if self.string[k] == 'H' and k-i > 1:
+                            if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0 :
+                                self.score = self.score + 1
+                                print(self.score)
+
+                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
+                                self.score = self.score + 1
+                                print(self.score)
+                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
+                                self.score = self.score + 1
+                                print(self.score)
+            print(self.score)
             return self.score
     
 
@@ -150,7 +190,10 @@ class Protein():
         # Plot the connections between the acids
         x_val = [x.x for x in self.aminochain]
         y_val = [x.y for x in self.aminochain]
-        plt.plot(x_val, y_val, 'k', zorder= 1)
+        z_val = [x.z for x in self.aminochain]
+        plt.plot(x_val, y_val,z_val, 'k', zorder= 1)
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
 
         # Plot the amino acids
         colour = []
@@ -162,18 +205,26 @@ class Protein():
             elif amino.acid_type == 'C':
                 colour.append('green')
         for i in range(len(self.string)):
-            plt.scatter(self.aminochain[i].x , self.aminochain[i].y, c = colour[i], s = 40, zorder=2)
+            ax.scatter3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z, c = colour[i], s = 40, zorder=2)
+            # ax.plot3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z)
 
 
-        # Layout of the plot
-        plt.xticks(np.arange(min(x_val) - 4, max(x_val) + 5))
-        plt.yticks(np.arange(min(y_val) - 4, max(y_val) + 5))
-        plt.ylabel('y_waarden')
-        plt.xlabel('x_waarden')
+        
+        
+        ax.plot3D(x_val, y_val, z_val, 'gray')
+
+       
+        ax.set_xlabel('X Label')
+        ax.set_ylabel('Y Label')
+        ax.set_zlabel('Z Label')
         red_patch = mpatches.Patch(color='red', label='H')
         blue_patch = mpatches.Patch(color='blue', label='P')
         green_patch = mpatches.Patch(color='green', label='C')
-        plt.legend(handles=[red_patch, blue_patch, green_patch])
+        ax.legend(handles=[red_patch, blue_patch, green_patch])
         plt.title(f"{self.string}, Score: {self.score}")
         plt.rc('axes', axisbelow=True)
         plt.show()
+
+        ax = plt.axes(projection='3d')
+
+

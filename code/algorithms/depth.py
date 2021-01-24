@@ -23,6 +23,7 @@ class DepthFirst:
         """
         Returns the next protein from the protein list.
         """
+        print('rastagotsoul')
         return self.proteins.pop()
 
     def build_children(self, protein,amino_position):
@@ -53,7 +54,10 @@ class DepthFirst:
         """
         while self.proteins:
             
+            print('prot')
+            print(self.proteins)
             protein = self.get_next_protein()
+            print(self.proteins)
             # Get the next amino acid in the chain.
             amino_position = protein.get_unplaced_amino_position()
             if amino_position is not None:
