@@ -119,52 +119,63 @@ class Protein():
             x_list = [x.x for x in self.aminochain]
             y_list = [x.y for x in self.aminochain]
             z_list = [x.z for x in self.aminochain] 
-            print(x_list)
-            print(y_list)
-            print(z_list)
-            for i in range(0,len(self.string)):
-                if self.string[i] == 'H':
-                    for j in range(i + 1, len(self.string)):
-                        if self.string[j] == 'H' or self.string[j] ==  'C' and j - i > 1:
-                            if abs(z_list[j] - z_list[i]) == 0:
-                                if abs(x_list[j] - x_list[i]) == 1 and abs(y_list[j] - y_list[i]) == 0:
-                                    self.score = self.score + 1
-                                    print("krabel")
-                            
-                                if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 1:
-                                    self.score = self.score + 1
-                                    print("frabel")
+            for i in range(len(self.string)):
+                for j in range(i+1, len(self.string)):
+                    if np.sqrt((x_list[i]-x_list[j])**2 + (y_list[i]-y_list[j])**2 + (z_list[i]-z_list[j])**2) == 1 and j-i > 1:
+                        if self.string[i] == 'H' and (self.string[j] == 'H' or self.string[j] == 'C'):
+                            self.score = self.score + 1
+                        elif (self.string[i] == 'H' or self.string[i] == 'C') and self.string[j] == 'H':
+                            self.score = self.score + 1
+                        elif self.string[i] == 'C' and self.string[j] == 'C':
+                            self.score = self.score + 5
 
-                            if abs(z_list[j] - z_list[i]) == 1:
-                                if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 0:
-                                    self.score = self.score + 1
-                                    print("snabel")
-                if self.string[i] == 'C':
-                    for k in range(i,len(self.string)):
-                        if self.string[k] == 'C' and k-i > 1:
-                            if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0:
-                                self.score = self.score + 5
-                                print(self.score)
-
-                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
-                                self.score = self.score + 5
-                                print(self.score)
-                            
-                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
-                                self.score = self.score + 5
-                                print(self.score)
                         
-                        if self.string[k] == 'H' and k-i > 1:
-                            if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0 :
-                                self.score = self.score + 1
-                                print(self.score)
+            # print(x_list)
+            # print(y_list)
+            # print(z_list)
+            # for i in range(0,len(self.string)):
+            #     if self.string[i] == 'H':
+            #         for j in range(i + 1, len(self.string)):
+            #             if self.string[j] == 'H' or self.string[j] ==  'C' and j - i > 1:
+            #                 if abs(z_list[j] - z_list[i]) == 0:
+            #                     if abs(x_list[j] - x_list[i]) == 1 and abs(y_list[j] - y_list[i]) == 0:
+            #                         self.score = self.score + 1
+            #                         print("krabel")
+                            
+            #                     if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 1:
+            #                         self.score = self.score + 1
+            #                         print("frabel")
 
-                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
-                                self.score = self.score + 1
-                                print(self.score)
-                            if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
-                                self.score = self.score + 1
-                                print(self.score)
+            #                 if abs(z_list[j] - z_list[i]) == 1:
+            #                     if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 0:
+            #                         self.score = self.score + 1
+            #                         print("snabel")
+            #     if self.string[i] == 'C':
+            #         for k in range(i,len(self.string)):
+            #             if self.string[k] == 'C' and k-i > 1:
+            #                 if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0:
+            #                     self.score = self.score + 5
+            #                     print(self.score)
+
+            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
+            #                     self.score = self.score + 5
+            #                     print(self.score)
+                            
+            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
+            #                     self.score = self.score + 5
+            #                     print(self.score)
+                        
+            #             if self.string[k] == 'H' and k-i > 1:
+            #                 if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0 :
+            #                     self.score = self.score + 1
+            #                     print(self.score)
+
+            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
+            #                     self.score = self.score + 1
+            #                     print(self.score)
+            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
+            #                     self.score = self.score + 1
+            #                     print(self.score)
             print(self.score)
             return self.score
     
