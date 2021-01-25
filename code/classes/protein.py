@@ -129,53 +129,7 @@ class Protein():
                         elif self.string[i] == 'C' and self.string[j] == 'C':
                             self.score = self.score + 5
 
-                        
-            # print(x_list)
-            # print(y_list)
-            # print(z_list)
-            # for i in range(0,len(self.string)):
-            #     if self.string[i] == 'H':
-            #         for j in range(i + 1, len(self.string)):
-            #             if self.string[j] == 'H' or self.string[j] ==  'C' and j - i > 1:
-            #                 if abs(z_list[j] - z_list[i]) == 0:
-            #                     if abs(x_list[j] - x_list[i]) == 1 and abs(y_list[j] - y_list[i]) == 0:
-            #                         self.score = self.score + 1
-            #                         print("krabel")
-                            
-            #                     if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 1:
-            #                         self.score = self.score + 1
-            #                         print("frabel")
-
-            #                 if abs(z_list[j] - z_list[i]) == 1:
-            #                     if abs(x_list[j] - x_list[i]) == 0 and abs(y_list[j] - y_list[i]) == 0:
-            #                         self.score = self.score + 1
-            #                         print("snabel")
-            #     if self.string[i] == 'C':
-            #         for k in range(i,len(self.string)):
-            #             if self.string[k] == 'C' and k-i > 1:
-            #                 if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0:
-            #                     self.score = self.score + 5
-            #                     print(self.score)
-
-            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
-            #                     self.score = self.score + 5
-            #                     print(self.score)
-                            
-            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
-            #                     self.score = self.score + 5
-            #                     print(self.score)
-                        
-            #             if self.string[k] == 'H' and k-i > 1:
-            #                 if abs(x_list[k] - x_list[i]) == 1 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 0 :
-            #                     self.score = self.score + 1
-            #                     print(self.score)
-
-            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 1 and abs(z_list[k] - z_list[i]) == 0:
-            #                     self.score = self.score + 1
-            #                     print(self.score)
-            #                 if abs(x_list[k] - x_list[i]) == 0 and abs(y_list[k] - y_list[i]) == 0 and abs(z_list[k] - z_list[i]) == 1:
-            #                     self.score = self.score + 1
-            #                     print(self.score)
+        
             return self.score
     
 
@@ -216,7 +170,7 @@ class Protein():
                 colour.append('green')
         for i in range(len(self.string)):
             ax.scatter3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z, c = colour[i], s = 40, zorder=2)
-            # ax.plot3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z)
+            
 
 
         
@@ -234,9 +188,8 @@ class Protein():
         plt.title(f"{self.string}, Score: {self.score}")
         plt.rc('axes', axisbelow=True)
         plt.show()
-        ax.xticks(np.arange(-len(self.string), len(self.string), 2))
-        ax.yticks(np.arange(-len(self.string), len(self.string), 2))
-        ax.zticks(np.arange(-len(self.string), len(self.string), 2))
-        ax = plt.axes(projection='3d')
+        plt.xticks(np.arange(-len(self.string), len(self.string), 1))
+        plt.xticks(np.arange(-len(self.string), len(self.string), 1))
+        
 
 

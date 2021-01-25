@@ -54,6 +54,7 @@ class DepthFirst:
         while self.proteins:
             
             protein = self.get_next_protein()
+        
             # Get the next amino acid in the chain.
             amino_position = protein.get_unplaced_amino_position()
             if amino_position is not None:

@@ -2,6 +2,7 @@ from code.algorithms.random import random_algorithm
 from code.classes.protein import Protein
 from code.algorithms.depth import DepthFirst
 from code.algorithms.breadth import BreadthFirst
+from code.algorithms.pruned_breadth import PrunedBreadthFirst
 
 if __name__ == "__main__":
 
@@ -24,9 +25,18 @@ if __name__ == "__main__":
     # algo.run().plot()
     # algo.run().output()
 
+
     # Breadth first algorithm
 
-    algo = BreadthFirst(string)
+    # algo = BreadthFirst(string)
+    # algo.run()
+    
+    # algo.run().plot()
+    # algo.run().output()
+   
+
+
+    algo = PrunedBreadthFirst(string)
     algo.run()
     
     algo.run().plot()
