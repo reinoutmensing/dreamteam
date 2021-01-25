@@ -234,7 +234,9 @@ class Protein():
         plt.title(f"{self.string}, Score: {self.score}")
         plt.rc('axes', axisbelow=True)
         plt.show()
-
+        ax.xticks(np.arange(-len(self.string), len(self.string), 2))
+        ax.yticks(np.arange(-len(self.string), len(self.string), 2))
+        ax.zticks(np.arange(-len(self.string), len(self.string), 2))
         ax = plt.axes(projection='3d')
 
 
