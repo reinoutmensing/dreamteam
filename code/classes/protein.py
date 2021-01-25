@@ -116,6 +116,7 @@ class Protein():
         if self.collision == True:
             self.score = 0
         else: 
+            self.score = 0
             x_list = [x.x for x in self.aminochain]
             y_list = [x.y for x in self.aminochain]
             z_list = [x.z for x in self.aminochain] 
