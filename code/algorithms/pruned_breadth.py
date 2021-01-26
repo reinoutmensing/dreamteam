@@ -38,5 +38,5 @@ class   PrunedBreadthFirst(DepthFirst):
         # Set's the output to be the protein with the highest score.
         protein = self.best_solution
 
-        return protein    
+        return self.best_solution
     

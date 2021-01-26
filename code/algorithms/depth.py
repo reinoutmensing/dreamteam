@@ -5,7 +5,6 @@ from tqdm import tqdm
 import copy
 import uuid
 
-direction_options = [-1, 1, -2, 2]
 
 class DepthFirst:
     """
@@ -17,7 +16,7 @@ class DepthFirst:
         self.proteins = [Protein(string, uuid.uuid4())]
         self.best_solution = None
         self.best_value = - float('inf')
-
+        self.direction_options = [-1, 1, -2, 2]
 
     def get_next_protein(self):
         """
@@ -30,7 +29,7 @@ class DepthFirst:
         Creates all possible child-proteins.
         """
         # Add a new state of the protein to the list of proteins.
-        for direction in direction_options:
+        for direction in self.direction_options:
             new_protein = copy.deepcopy(protein)
             if new_protein.fold_next_amino(amino_position,direction) == False:
                 self.proteins.append(new_protein)
@@ -45,7 +44,6 @@ class DepthFirst:
         if new_score >= old_value:
             self.best_solution = new_protein
             self.best_value = new_score
-
 
     def run(self):
         """
@@ -65,7 +63,7 @@ class DepthFirst:
         # Set's the output to be the protein with the highest score.
         protein = self.best_solution
 
-        return protein
+        return self.best_solution
 
         
 

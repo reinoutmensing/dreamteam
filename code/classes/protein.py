@@ -7,6 +7,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits import mplot3d
 
 class Protein():
+    """
+    Protein class that contains all the items and functions of the amino acid chain. 
+    """
     
     def __init__(self, string, id):
         self.id = id
@@ -33,7 +36,6 @@ class Protein():
         
         return None
             
-
     def make_protein(self):
         """
         Initiates the protein structure from the provided string.
@@ -42,7 +44,6 @@ class Protein():
             a = Amino(c)
             self.aminochain.append(a)
             
-
     def fold_next_amino(self, position, direction):
         """
         Folds the amino acid at the specified position in the chain, in the given direction.
@@ -60,7 +61,6 @@ class Protein():
             newcord = (self.aminochain[position - 1].x + 1, self.aminochain[position - 1].y, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(1)
             
-
         elif direction == -1 and 2 not in self.aminochain[position].checklist:
 
             newcord = (self.aminochain[position - 1].x - 1, self.aminochain[position - 1].y, self.aminochain[position -1].z)
@@ -76,15 +76,11 @@ class Protein():
             newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y - 1, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(4)
         
-        
-        
         if newcord in set(self.aminocoordinates):
             
-            # Code is build in
             if len(self.aminochain[position].checklist) == 4:
                 self.collision = True
                 return False
-            
 
             else:
                 # and checklist
@@ -93,22 +89,14 @@ class Protein():
             # and checklist
             return True 
 
-
         else :
             self.aminochain[position].x = newcord[0]
             self.aminochain[position].y = newcord[1]
             self.aminochain[position].z = newcord[2]
-
-        # Checks if a collision has occured by verifiying the uniqueness of all the amino acid coordinates. 
             self.aminocoordinates.append((self.aminochain[position].x, self.aminochain[position].y, self.aminochain[position].z))
             self.direction_list.append(direction)
             return False
-        
-        # wat je kan doen is de directions per coor bijhouden en zorgen dat hij niet twee keer dezelfde directie op kan gaan
-        # dan een counter bijhouden en als de counter op vier staat zorgen dat de functie breakt en de volgende string bekeken wordt.
-       
 
-  
     def getscore(self):
         """
         Calculates the stability score of the protein. In case of a collision, the score is set to 0. 
@@ -126,14 +114,12 @@ class Protein():
                         if self.string[i] == 'H' and (self.string[j] == 'H' or self.string[j] == 'C'):
                             self.score = self.score + 1
                         elif (self.string[i] == 'H' or self.string[i] == 'C') and self.string[j] == 'H':
-                            self.score = self.score + 1 
+                            self.score = self.score + 1
                         elif self.string[i] == 'C':
                             self.score = self.score + 5
                             
-        
             return self.score
     
-
     def output(self):
         """
         Creates a CSV representation of the protein, with it's folding directions and score. 
@@ -147,7 +133,6 @@ class Protein():
                 writer.writerow({'amino': amino, 'fold' : direction})   
             writer.writerow({'amino': 'score', 'fold' : self.score}) 
                         
-
     def plot(self):
         """
         Visualises the protein in the form of a plot. 
@@ -172,13 +157,8 @@ class Protein():
         for i in range(len(self.string)):
             ax.scatter3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z, c = colour[i], s = 40, zorder=2)
             
-
-
-        
-        
+        # Plot style elements
         ax.plot3D(x_val, y_val, z_val, 'gray')
-
-       
         ax.set_xlabel('X Label')
         ax.set_ylabel('Y Label')
         ax.set_zlabel('Z Label')
@@ -188,9 +168,9 @@ class Protein():
         ax.legend(handles=[red_patch, blue_patch, green_patch])
         plt.title(f"{self.string}, Score: {self.score}")
         plt.rc('axes', axisbelow=True)
+        plt.xticks(np.arange(-len(self.string), len(self.string), 1))
+        plt.yticks(np.arange(-len(self.string), len(self.string), 1))
         plt.show()
-        plt.xticks(np.arange(-len(self.string), len(self.string), 1))
-        plt.xticks(np.arange(-len(self.string), len(self.string), 1))
         
 
 
