@@ -122,20 +122,14 @@ class Protein():
             z_list = [x.z for x in self.aminochain] 
             for i in range(len(self.string)):
                 for j in range(i+1, len(self.string)):
-                    if np.sqrt((x_list[i]-x_list[j])**2 + (y_list[i]-y_list[j])**2 + (z_list[i]-z_list[j])**2) == 1 and j-i > 1:
+                    if np.sqrt((x_list[i]-x_list[j])**2 + (y_list[i]-y_list[j])**2 + (z_list[i]-z_list[j])**2) == 1 and j-i > 1 and repr(self.aminochain[j]) != "(0, 0, 0)":
                         if self.string[i] == 'H' and (self.string[j] == 'H' or self.string[j] == 'C'):
                             self.score = self.score + 1
-                            if self.aminochain[j].x == 0 and self.aminochain[j].y == 0 and self.aminochain[j].z == 0:
-                                self.score = self.score - 1 
                         elif (self.string[i] == 'H' or self.string[i] == 'C') and self.string[j] == 'H':
-                            self.score = self.score + 1
-                            if self.aminochain[j].x == 0 and self.aminochain[j].y == 0 and self.aminochain[j].z == 0:
-                                self.score = self.score - 1 
+                            self.score = self.score + 1 
                         elif self.string[i] == 'C':
                             self.score = self.score + 5
-                            if self.aminochain[j].x == 0 and self.aminochain[j].y == 0 and self.aminochain[j].z == 0:
-                                self.score = self.score - 5
-
+                            
         
             return self.score
     
