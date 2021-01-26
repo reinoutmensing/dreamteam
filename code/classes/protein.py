@@ -51,9 +51,9 @@ class Protein():
         newcord = None
         deler = round(len(self.aminochain) / 3)
         
-        # if ((len(self.direction_list) + 1 )% deler == 0):
-        #     newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position - 1].z + 1)
-        #     direction = 5
+        if ((len(self.direction_list) + 1 )% deler == 0):
+            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position - 1].z + 1)
+            direction = 5
 
         if direction == 1 and 1 not in self.aminochain[position].checklist:
 
@@ -125,10 +125,16 @@ class Protein():
                     if np.sqrt((x_list[i]-x_list[j])**2 + (y_list[i]-y_list[j])**2 + (z_list[i]-z_list[j])**2) == 1 and j-i > 1:
                         if self.string[i] == 'H' and (self.string[j] == 'H' or self.string[j] == 'C'):
                             self.score = self.score + 1
+                            if self.aminochain[j].x == 0 and self.aminochain[j].y == 0 and self.aminochain[j].z == 0:
+                                self.score = self.score - 1 
                         elif (self.string[i] == 'H' or self.string[i] == 'C') and self.string[j] == 'H':
                             self.score = self.score + 1
-                        elif self.string[i] == 'C' and self.string[j] == 'C':
+                            if self.aminochain[j].x == 0 and self.aminochain[j].y == 0 and self.aminochain[j].z == 0:
+                                self.score = self.score - 1 
+                        elif self.string[i] == 'C':
                             self.score = self.score + 5
+                            if self.aminochain[j].x == 0 and self.aminochain[j].y == 0 and self.aminochain[j].z == 0:
+                                self.score = self.score - 5
 
         
             return self.score

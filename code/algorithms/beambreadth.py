@@ -14,16 +14,20 @@ class   BeamBreadth(DepthFirst):
         """
         scores_list = []
         while self.proteins:
-            
             protein = self.get_next_protein()
             score = protein.getscore()   
-            if len(scores_list) > 3 and score < min(scores_list)-3:
+            print(protein.aminochain)
+            print(score)
+            print(protein.getscore())
+            print(scores_list)
+            if len(scores_list) > 19 and score < min(scores_list):
+                print(protein.getscore())
                 continue
             else: # Get the next amino acid in the chain.
                 scores_list.append(protein.getscore())
                 print(f"{len(scores_list)}, {max(scores_list)}, {self.best_solution}")
                 amino_position = protein.get_unplaced_amino_position()
-                if len(scores_list) > 200:
+                if len(scores_list) > 20:
                     scores_list.remove(min(scores_list))
                 if amino_position is not None:
                     self.build_children(protein, amino_position)
