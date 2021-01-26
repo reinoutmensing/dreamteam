@@ -3,6 +3,7 @@ from code.classes.protein import Protein
 from code.algorithms.depth import DepthFirst
 from code.algorithms.breadth import BreadthFirst
 from code.algorithms.pruned_breadth import PrunedBreadthFirst
+from code.algorithms.beambreadth import BeamBreadth
 
 if __name__ == "__main__":
 
@@ -27,23 +28,18 @@ if __name__ == "__main__":
 
 
     # Breadth first algorithm
-
     # algo = BreadthFirst(string)
-    # algo.run()
+
+    # Pruned breadth first
+    # algo = PrunedBreadthFirst(string)
     
-    # algo.run().plot()
-    # algo.run().output()
-   
-
-
-    algo = PrunedBreadthFirst(string)
+    # Beam search and breadth first combined
+    algo = BeamBreadth(string)
+    
+    # Run algorithm
     algo.run()
-    
     algo.run().plot()
     algo.run().output()
-   
-
-
   
     
   
