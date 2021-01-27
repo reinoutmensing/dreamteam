@@ -16,7 +16,7 @@ class DepthFirst:
         self.proteins = [Protein(string, uuid.uuid4())]
         self.best_solution = None
         self.best_value = - float('inf')
-        self.direction_options = [-1, 1, -2, 2, -3, 3]
+        self.direction_options = [-1, 1, -2, 2]
 
     def get_next_protein(self):
         """

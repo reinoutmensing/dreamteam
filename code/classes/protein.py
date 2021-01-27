@@ -3,11 +3,8 @@ from code.classes.aminoacid import Amino
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
-from mpl_toolkits.mplot3d import axes3d
-from mpl_toolkits import mplot3d
-from matplotlib import animation
 from mpl_toolkits.mplot3d import Axes3D
-
+from mpl_toolkits import mplot3d
 
 class Protein():
     """
@@ -51,12 +48,13 @@ class Protein():
         """
         Folds the amino acid at the specified position in the chain, in the given direction.
         """
+
         newcord = None
-        # deler = round(len(self.aminochain) / 3)
+        deler = round(len(self.aminochain) / 3)
         
-        # if ((len(self.direction_list) + 1 )% deler == 0):
-            # newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position - 1].z + 1)
-            # direction = 5
+        if ((len(self.direction_list) + 1 )% deler == 0):
+            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position - 1].z + 1)
+            direction = 5
 
         if direction == 1 and 1 not in self.aminochain[position].checklist:
 
@@ -78,21 +76,12 @@ class Protein():
             newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y - 1, self.aminochain[position -1].z)
             self.aminochain[position].checklist.append(4)
         
-        elif direction == 3 and 5 not in self.aminochain[position].checklist:
-
-            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position -1].z + 1)
-            self.aminochain[position].checklist.append(5)
-
-        elif direction == -3 and 6 not in self.aminochain[position].checklist:
-
-            newcord = (self.aminochain[position - 1].x, self.aminochain[position - 1].y, self.aminochain[position -1].z - 1)
-            self.aminochain[position].checklist.append(6)
-
         if newcord in set(self.aminocoordinates):
             
-            if len(self.aminochain[position].checklist) == 6:
+            if len(self.aminochain[position].checklist) == 4:
                 self.collision = True
                 return False
+
             else:
                 # and checklist
                 return True
@@ -152,27 +141,24 @@ class Protein():
         x_val = [x.x for x in self.aminochain]
         y_val = [x.y for x in self.aminochain]
         z_val = [x.z for x in self.aminochain]
+        plt.plot(x_val, y_val,z_val, 'k', zorder= 1)
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        ax.plot3D(x_val, y_val, z_val, 'gray')
 
         # Plot the amino acids
-        def init():
-            colour = []
-            for amino in self.aminochain:
-                if amino.acid_type == 'H':
-                    colour.append('red')   
-                elif amino.acid_type == 'P':
-                    colour.append('blue') 
-                elif amino.acid_type == 'C':
-                    colour.append('green')
-            for i in range(len(self.string)):
-                ax.scatter3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z, c = colour[i], s = 40, zorder=2)
-            
-            return fig,
+        colour = []
+        for amino in self.aminochain:
+            if amino.acid_type == 'H':
+                colour.append('red')   
+            elif amino.acid_type == 'P':
+                colour.append('blue') 
+            elif amino.acid_type == 'C':
+                colour.append('green')
+        for i in range(len(self.string)):
+            ax.scatter3D(self.aminochain[i].x , self.aminochain[i].y, self.aminochain[i].z, c = colour[i], s = 40, zorder=2)
             
         # Plot style elements
-        fig.suptitle(f'{self.string}')
+        ax.plot3D(x_val, y_val, z_val, 'gray')
         ax.set_xlabel('X Label')
         ax.set_ylabel('Y Label')
         ax.set_zlabel('Z Label')
@@ -180,20 +166,11 @@ class Protein():
         blue_patch = mpatches.Patch(color='blue', label='P')
         green_patch = mpatches.Patch(color='green', label='C')
         ax.legend(handles=[red_patch, blue_patch, green_patch])
-        plt.title(f"Score: {self.score}")
-        init()
+        plt.title(f"{self.string}, Score: {self.score}")
+        plt.rc('axes', axisbelow=True)
+        plt.xticks(np.arange(-len(self.string), len(self.string), 1))
+        plt.yticks(np.arange(-len(self.string), len(self.string), 1))
+        plt.show()
         
 
 
-        # def animate(i):
-        #     ax.view_init(elev=10., azim=i)
-        #     return fig,
-
-        # Animate
-        # anim = animation.FuncAnimation(fig, animate, init_func=init,
-        #                             frames=360, interval=5, blit=True)
-        # # Save
-        # anim.save('basic_animation.gif', fps=10)
-
-        ax.view_init(elev=20, azim=125)
-        plt.show()
