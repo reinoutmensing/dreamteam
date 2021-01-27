@@ -28,17 +28,16 @@ C for DepthFirst, D for PrunedBreadthFirst or E for BeamBreadth:").upper()
             break
 
     # Algorithms
-    print(algorithm)
     if algorithm == 'A':
         try_number = int(input("Provide number of proteins the algorithm has to produce:"))
         algo = RandomAlgorithm(string, try_number)
-    if algorithm == 'B':
+    elif algorithm == 'B':
         algo = BreadthFirst(string)
-    if algorithm == 'C':
+    elif algorithm == 'C':
         algo = DepthFirst(string)
-    if algorithm == 'D':
+    elif algorithm == 'D':
         algo = PrunedBreadthFirst(string)
-    if algorithm == 'E':
+    elif algorithm == 'E':
         algo = BeamBreadth(string)
     
     # Run algorithm, visualisation and CSV output
