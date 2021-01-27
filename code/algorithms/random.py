@@ -10,7 +10,7 @@ class RandomAlgorithm:
     def __init__(self, string, try_number):
         self.try_number = try_number
         self.string = string
-        self.direction_options = [-1, 1, -2, 2]
+        self.direction_options = [-1, 1, -2, 2, -3, 3]
         self.protein_list = []
         self.direction_list = []
         self.score_list = []

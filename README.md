@@ -1,7 +1,6 @@
 # dreamteam
 
-### In order to see progress of program
-pip instal tqdm 
+![results random algorithm](docs/random.gif)
 
 # Case protein pow(d)er
 
